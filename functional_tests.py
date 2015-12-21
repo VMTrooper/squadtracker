@@ -31,4 +31,5 @@ class NewVisitorTest(unittest.TestCase):
 		
 		# The page updates and both squadmates are displayed.
 if __name__ == '__main__':
-	unittest.main(warnings='ignore')
+	unittest.main()
+	# unittest.main(warnings='ignore')

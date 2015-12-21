@@ -2,3 +2,4 @@ pymongo
 django==1.8.4
 selenium --upgrade
 jinja2
+chromedriver (https://sites.google.com/a/chromium.org/chromedriver/)
