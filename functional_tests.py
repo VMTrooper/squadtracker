@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import unittest
 
 class NewVisitorTest(unittest.TestCase):
@@ -19,7 +20,7 @@ class NewVisitorTest(unittest.TestCase):
 		# "Destiny SquadTracker"
 		self.assertIn('Destiny SquadTracker',self.browser.title)
 		header_text = self.browser.find_element_by_tag_name('h1').text
-		self.assertIn('Destiny SquadTracker',header_text)
+		self.assertIn('Destiny Squad',header_text)
 		
 		# Mike enters the gamertag of one of his teammates
 		inputbox = self.browser.find_element_by_id('id_new_item')
@@ -36,7 +37,8 @@ class NewVisitorTest(unittest.TestCase):
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
 		self.assertTrue(
-			any(row.text == 'RaZaK' for row in rows)
+			any(row.text == 'RaZaK' for row in rows),
+			"RaZaK does not appear in the squad list"
 			)
 		
 		# There is still a textbox to enter more squadmates.
