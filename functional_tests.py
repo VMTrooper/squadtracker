@@ -30,6 +30,9 @@ class NewVisitorTest(unittest.TestCase):
 			)
 		inputbox.send_keys('RaZaK')
 		inputbox.send_keys(Keys.ENTER)
+		# import time
+		# time.sleep(10)
+		table = self.browser.find_element_by_id('id_list_table')
 		
 		# The gamertag is added to his list of teammates,
 		# and it is a clickable link that will display his

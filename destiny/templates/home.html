@@ -4,7 +4,10 @@
 	</head>
 	<body>
 		<h1>Your Destiny Squad</h1>
-		<input id="id_new_item" placeholder="Enter a squad member name"/>
+		<form method="POST">
+			<input name="item_text" id="id_new_item" placeholder="Enter a squad member name"/>
+			{% csrf_token %}
+		</form>
 		<table id="id_list_table">
 		</table>
 	</body>
