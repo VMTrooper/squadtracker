@@ -39,16 +39,29 @@ class NewVisitorTest(unittest.TestCase):
 		# squad mate's light level, weapons, and armor
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
-		self.assertTrue(
-			any(row.text == 'RaZaK' for row in rows),
-			"RaZaK does not appear in the squad list"
-			)
-		
+		# self.assertTrue(
+		# 	any(row.text == 'RaZaK' for row in rows),
+		# 	"RaZaK does not appear in the squad list"
+		# 	)
+		self.assertIn('RaZaK', [row.text for row in rows])
 		# There is still a textbox to enter more squadmates.
 		# So, he adds another.
-		self.fail('Finish the test!')
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox.send_keys('Bravo Brooklyn')
+		inputbox.send_keys(Keys.ENTER)
 		
 		# The page updates and both squadmates are displayed.
+		table = self.browser.find_element_by_id('id_list_table')
+		rows = table.find_elements_by_tag_name('tr')
+		self.assertIn('RaZaK', [row.text for row in rows])
+		self.assertIn('Bravo Brooklyn', [row.text for row in rows])
+
+
+		# Mike wonders whether the site will remember his list.
+		# Then he sees that the site has generated a unique URL for him
+		self.fail('Finish the test!')
+
+		# Mike visits that URL - his Squad Members are still listed.
 if __name__ == '__main__':
 	unittest.main()
 	# unittest.main(warnings='ignore')
