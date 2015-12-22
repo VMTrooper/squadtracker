@@ -1,0 +1,1 @@
+<testsuite errors="0" failures="0" name="Django Project Tests" skips="0" tests="2" time="0.007"><testcase classname="destiny.tests.HomePageTest" name="test_home_page_returns_correct_html" time="0.005036" /><testcase classname="destiny.tests.HomePageTest" name="test_root_url_resolves_to_home_page_view" time="0.000704" /></testsuite>

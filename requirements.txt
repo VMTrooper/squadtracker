@@ -3,6 +3,7 @@ pymongo
 django==1.8.4
 django-jenkins
 selenium --upgrade
+coverage
 jinja2
 
 test machine binary
@@ -11,7 +12,7 @@ http://chromedriver.storage.googleapis.com/2.20/chromedriver_linux64.zip
 http://chromedriver.storage.googleapis.com/2.20/chromedriver_mac32.zip
 
 Jenkins Server
-firefox
+firefox (Debian iceweasel)
 chrome
 python3
 jenkinsplugin-Violations

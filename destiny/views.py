@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.template.loader import render_to_string
 
 
 # Create your views here.
 def home_page(request):
-	# response = HttpResponse("<html><title>Destiny SquadTracker</title></html>")
-	return render(request,'home.html')
+	# if request.method == 'POST':
+	return render(request, 'home.html', {
+		'new_item_text': request.POST.get('item_text', ''),
+	})
+	# return render(request,'home.html')
