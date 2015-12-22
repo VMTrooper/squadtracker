@@ -11,6 +11,11 @@ class NewVisitorTest(unittest.TestCase):
 		# Satisfied, Mike closes the web browser
 		self.browser.quit()
 
+	def check_for_row_in_list_table(self, row_text):
+		table = self.browser.find_element_by_id('id_list_table')
+		rows = table.find_elements_by_tag_name('tr')
+		self.assertIn(row_text,[row.text for row in rows])
+
 	def test_can_start_a_squad_and_retrieve_it_later(self):
 		# Mike has heard of a site for keeping track of his
 		# Destiny squad mates, and he checks it out.
@@ -39,11 +44,8 @@ class NewVisitorTest(unittest.TestCase):
 		# squad mate's light level, weapons, and armor
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
-		# self.assertTrue(
-		# 	any(row.text == 'RaZaK' for row in rows),
-		# 	"RaZaK does not appear in the squad list"
-		# 	)
-		self.assertIn('RaZaK', [row.text for row in rows])
+		self.check_for_row_in_list_table('RaZaK')
+		
 		# There is still a textbox to enter more squadmates.
 		# So, he adds another.
 		inputbox = self.browser.find_element_by_id('id_new_item')
@@ -53,8 +55,8 @@ class NewVisitorTest(unittest.TestCase):
 		# The page updates and both squadmates are displayed.
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
-		self.assertIn('RaZaK', [row.text for row in rows])
-		self.assertIn('Bravo Brooklyn', [row.text for row in rows])
+		self.check_for_row_in_list_table('RaZaK')
+		self.check_for_row_in_list_table('Bravo Brooklyn')
 
 
 		# Mike wonders whether the site will remember his list.
