@@ -45,19 +45,18 @@ class NewVisitorTest(unittest.TestCase):
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
 		self.check_for_row_in_list_table('RaZaK')
-		
+
 		# There is still a textbox to enter more squadmates.
 		# So, he adds another.
 		inputbox = self.browser.find_element_by_id('id_new_item')
 		inputbox.send_keys('Bravo Brooklyn')
 		inputbox.send_keys(Keys.ENTER)
-		
+
 		# The page updates and both squadmates are displayed.
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
 		self.check_for_row_in_list_table('RaZaK')
 		self.check_for_row_in_list_table('Bravo Brooklyn')
-
 
 		# Mike wonders whether the site will remember his list.
 		# Then he sees that the site has generated a unique URL for him
