@@ -1,8 +1,9 @@
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import unittest
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
 	def setUp(self):
 		self.browser = webdriver.Chrome()
 		self.browser.implicitly_wait(5)
@@ -19,7 +20,7 @@ class NewVisitorTest(unittest.TestCase):
 	def test_can_start_a_squad_and_retrieve_it_later(self):
 		# Mike has heard of a site for keeping track of his
 		# Destiny squad mates, and he checks it out.
-		self.browser.get('http://localhost:8000')
+		self.browser.get(self.live_server_url)
 		
 		# He notices the page title and header include the text
 		# "Destiny SquadTracker"
@@ -63,6 +64,3 @@ class NewVisitorTest(unittest.TestCase):
 		self.fail('Finish the test!')
 
 		# Mike visits that URL - his Squad Members are still listed.
-if __name__ == '__main__':
-	unittest.main()
-	# unittest.main(warnings='ignore')
