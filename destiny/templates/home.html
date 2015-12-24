@@ -3,15 +3,10 @@
 		<title>Destiny SquadTracker</title>
 	</head>
 	<body>
-		<h1>Your Destiny Squad</h1>
+		<h1>Start a new Destiny Squad</h1>
 		<form method="POST">
 			<input name="item_text" id="id_new_item" placeholder="Enter a squad member name"/>
 			{% csrf_token %}
 		</form>
-		<table id="id_list_table">
-		{% for item in items %}
-			<tr><td>{{ item.text }}</td></tr>
-		{% endfor %}
-		</table>
 	</body>
 </html>

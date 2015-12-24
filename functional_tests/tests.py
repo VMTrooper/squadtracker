@@ -41,7 +41,7 @@ class NewVisitorTest(LiveServerTestCase):
 		# Squad table.
 		inputbox.send_keys(Keys.ENTER)
 		mike_list_url = self.browser.current_url
-		self.assertRegex(mike_list_url, '/lists/.+')
+		self.assertRegex(mike_list_url, '/squads/.+')
 		self.check_for_row_in_list_table('RaZaK')
 
 		# There is still a textbox to enter more squadmates.
@@ -78,7 +78,7 @@ class NewVisitorTest(LiveServerTestCase):
 
 		# Johnny gets his own unique URL
 		johnny_list_url = self.browser.current_url
-		self.assertRegex(johnny_list_url, '/lists/.+')
+		self.assertRegex(johnny_list_url, '/squads/.+')
 		self.assertNotEqual(johnny_list_url, mike_list_url)
 
 		# Again, there is no trace of Mike's list

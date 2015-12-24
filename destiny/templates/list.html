@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>Destiny SquadTracker</title>
+	</head>
+	<body>
+		<form method="POST" action="/">
+		<h1>Your Destiny Squad</h1>
+		<table id="id_list_table">
+		{% for item in items %}
+			<tr><td>{{ item.text }}</td></tr>
+		{% endfor %}
+		</table>
+	</body>
+</html>

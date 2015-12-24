@@ -5,6 +5,20 @@ from django.template.loader import render_to_string
 from destiny.views import home_page
 from destiny.models import Item
 
+class ListViewTest(TestCase):
+	def test_uses_list_template(self):
+		response = self.client.get('/squads/the-only-squad-in-the-world/')
+		self.assertTemplateUsed(response, 'list.html')
+
+	def test_displays_all_item(self):
+		Item.objects.create(text='squadmem01')
+		Item.objects.create(text='squadmem02')
+
+		response = self.client.get('/squads/the-only-squad-in-the-world/')
+
+		self.assertContains(response, 'squadmem01')
+		self.assertContains(response, 'squadmem02')
+
 class ItemModelTest(TestCase):
 	def test_saving_and_retrieveing_items(self):
 		first_item = Item()
@@ -47,7 +61,7 @@ class HomePageTest(TestCase):
 		response = home_page(request)
 
 		self.assertEqual(response.status_code, 302)
-		self.assertEqual(response['location'], '/')
+		self.assertEqual(response['location'], '/squads/the-only-squad-in-the-world/')
 
 	def test_home_page_can_save_a_POST_request(self):
 		request = HttpRequest()
@@ -59,12 +73,3 @@ class HomePageTest(TestCase):
 		self.assertEqual(Item.objects.count(), 1)
 		new_item = Item.objects.first()
 		self.assertEqual(new_item.text,'A new squad member')
-		
-	def test_home_page_displays_all_list_items(self):
-		Item.objects.create(text='squadmem01')
-		Item.objects.create(text='squadmem02')
-		request = HttpRequest()
-		response = home_page(request)
-
-		self.assertIn('squadmem01', response.content.decode())
-		self.assertIn('squadmem02', response.content.decode())
