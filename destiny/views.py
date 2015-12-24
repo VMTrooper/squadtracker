@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from destiny.models import Item
+from destiny.models import Item, List
 
 # Create your views here.
 def home_page(request):
@@ -12,5 +12,6 @@ def view_squad(request):
 	return render(request, 'list.html', {'items':items})
 
 def new_squad(request):
-	Item.objects.create(text=request.POST['item_text'])
+	list_ = List.objects.create()
+	Item.objects.create(text=request.POST['item_text'], list=list_)
 	return redirect('/squads/the-only-squad-in-the-world/')
