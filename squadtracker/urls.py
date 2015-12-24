@@ -18,8 +18,7 @@ from django.contrib import admin
 from destiny import views
 
 urlpatterns = [
-	url(r'^$', views.home_page, name='home_page'),
-	# url(r'^$', home_page),
+	url(r'^$', views.home_page, name='home'),
+	url(r'^squads/new$', views.new_squad, name='new_squad'),
 	url(r'^squads/the-only-squad-in-the-world/$', views.view_squad, name='view_squad'),
-    #url(r'^admin/', include(admin.site.urls)),
 ]
