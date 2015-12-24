@@ -35,16 +35,13 @@ class NewVisitorTest(LiveServerTestCase):
 			'Enter a squad member name'
 			)
 		inputbox.send_keys('RaZaK')
+
+		# When he hits enter, he is taken to a new URL,
+		# and now the page lists "RaZaK" as a member in the
+		# Squad table.
 		inputbox.send_keys(Keys.ENTER)
-		# import time
-		# time.sleep(10)
-		table = self.browser.find_element_by_id('id_list_table')
-		
-		# The gamertag is added to his list of teammates,
-		# and it is a clickable link that will display his
-		# squad mate's light level, weapons, and armor
-		table = self.browser.find_element_by_id('id_list_table')
-		rows = table.find_elements_by_tag_name('tr')
+		mike_list_url = self.browser.current_url
+		self.assertRegex(mike_list_url, '/lists/.+')
 		self.check_for_row_in_list_table('RaZaK')
 
 		# There is still a textbox to enter more squadmates.
@@ -59,8 +56,34 @@ class NewVisitorTest(LiveServerTestCase):
 		self.check_for_row_in_list_table('RaZaK')
 		self.check_for_row_in_list_table('Bravo Brooklyn')
 
-		# Mike wonders whether the site will remember his list.
-		# Then he sees that the site has generated a unique URL for him
-		self.fail('Finish the test!')
+		# Now a new user, Johnny, comes along to the site.
 
-		# Mike visits that URL - his Squad Members are still listed.
+		## We use a new browser session to make sure that no information
+		## of Mike's is coming through from cookies, etc.
+		self.browser.quit()
+		self.browser = webdriver.Chrome()
+
+		# Johnny visits the home page. There is no sign of Mike's
+		# list
+		self.browser.get(self.live_server_url)
+		page_text = self.browser.find_element_by_tag_name('body').text
+		self.assertNotIn('Bravo Brooklyn',page_text)
+		self.assertNotIn('RaZaK',page_text)
+
+		# Johnny starts a new list by entering a new item. He
+		# has less squad members than Mike
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox.send_keys('PR Dragon')
+		inputbox.send_keys(Keys.ENTER)
+
+		# Johnny gets his own unique URL
+		johnny_list_url = self.browser.current_url
+		self.assertRegex(johnny_list_url, '/lists/.+')
+		self.assertNotEqual(johnny_list_url, mike_list_url)
+
+		# Again, there is no trace of Mike's list
+		page_text = self.browser.find_element_by_tag_name('body').text
+		self.assertNotIn('Bravo Brooklyn', page_text)
+		self.assertIn('PR Dragon', page_text)
+
+		# Satisfied, they both go back to Destiny
