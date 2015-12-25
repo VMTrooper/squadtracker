@@ -1,17 +1,10 @@
-<html>
-	<head>
-		<title>Destiny SquadTracker</title>
-	</head>
-	<body>
-		<form method="POST" action="/squads/{{squad.id}}/add_item">
-		<input name="item_text" id="id_new_item" placeholder="Enter a Squad member"/>
-		   {%csrf_token%}
-		</form>
-		<h1>Your Destiny Squad</h1>
-		<table id="id_list_table">
+{% extends 'base.html' %}
+{% block header_text %}Destiny SquadTracker{% endblock %}
+{% block form_action %}/squads/{{squad.id}}/add_item{% endblock %}
+{% block table %}
+	<table id="id_list_table">
 		{% for item in squad.item_set.all %}
-			<tr><td>{{ item.text }}</td></tr>
+		<tr><td>{{ item.text }}</td></tr>
 		{% endfor %}
-		</table>
-	</body>
-</html>
+	</table>
+{% endblock %}
