@@ -5,9 +5,7 @@
 	<body>
 		<h1>Start a new Destiny Squad</h1>
 		<form method="POST" action="/squads/new">
-		<p style="text-align: center;">
 			<input name="item_text" id="id_new_item" placeholder="Enter a squad member name"/>
-		</p>
 			{% csrf_token %}
 		</form>
 	</body>
