@@ -3,7 +3,10 @@
 		<title>Destiny SquadTracker</title>
 	</head>
 	<body>
-		<form method="POST" action="/squads/{{list.id}}/add_item">
+		<form method="POST" action="/squads/{{squad.id}}/add_item">
+		<input name="item_text" id="id_new_item" placeholder="Enter a Squad member"/>
+		   {%csrf_token%}
+		</form>
 		<h1>Your Destiny Squad</h1>
 		<table id="id_list_table">
 		{% for item in squad.item_set.all %}

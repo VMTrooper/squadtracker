@@ -21,4 +21,5 @@ from destiny import urls as squad_urls
 urlpatterns = [
 	url(r'^$', squad_views.home_page, name='home'),
 	url(r'^squads/', include(squad_urls)),
+	#url(r'^admin/', include(admin.site.urls)),
 ]

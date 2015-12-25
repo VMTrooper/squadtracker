@@ -41,7 +41,7 @@ class NewVisitorTest(LiveServerTestCase):
 		# Squad table.
 		inputbox.send_keys(Keys.ENTER)
 		mike_list_url = self.browser.current_url
-		self.assertRegex(mike_list_url, '/squads/.+')
+		self.assertRegex(mike_list_url, 'squads/.+')
 		self.check_for_row_in_list_table('RaZaK')
 
 		# There is still a textbox to enter more squadmates.
