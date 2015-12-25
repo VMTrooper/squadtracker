@@ -1,4 +1,4 @@
-"""squadtracker URL Configuration
+"""destiny URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -13,12 +13,13 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
-from django.contrib import admin
-from destiny import views as squad_views
-from destiny import urls as squad_urls
+# from django.conf.urls import include, url
+# from django.contrib import admin
+from django.conf.urls import url
+from destiny import views
 
 urlpatterns = [
-	url(r'^$', squad_views.home_page, name='home'),
-	url(r'^squads/', include(squad_urls)),
+    url(r'^new$', views.new_squad, name='new_squad'),
+    url(r'^(\d+)/$', views.view_squad, name='view_squad'),
+    url(r'^(\d+)/add_item$', views.add_item, name='add_item'),
 ]
