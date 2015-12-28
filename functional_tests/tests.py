@@ -34,7 +34,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 		self.assertIn(row_text,[row.text for row in rows])
 	def test_layout_and_styling(self):
 		# Mike goes to the home page
-		self.browser.get(self.live_server_url)
+		self.browser.get(self.server_url)
 		self.browser.set_window_size(1024,768)
 
 		# He notices the input box is nicely centered
@@ -58,7 +58,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 	def test_can_start_a_squad_and_retrieve_it_later(self):
 		# Mike has heard of a site for keeping track of his
 		# Destiny squad mates, and he checks it out.
-		self.browser.get(self.live_server_url)
+		self.browser.get(self.server_url)
 		
 		# He notices the page title and header include the text
 		# "Destiny SquadTracker"
@@ -103,7 +103,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
 		# Johnny visits the home page. There is no sign of Mike's
 		# list
-		self.browser.get(self.live_server_url)
+		self.browser.get(self.server_url)
 		page_text = self.browser.find_element_by_tag_name('body').text
 		self.assertNotIn('Bravo Brooklyn',page_text)
 		self.assertNotIn('RaZaK',page_text)
