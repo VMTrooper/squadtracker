@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'j=a5#+x9npdw64p@fxxj-bpi^%dp^smsxf-tb#xsb%0+)5(!!f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+TEMPLATE_DEBUG = DEBUG
+
+ALLOWED_HOSTS = ['staging.squadtracker.io']
 
 
 # Application definition
