@@ -2,7 +2,7 @@
 {% block header_text %}Destiny SquadTracker{% endblock %}
 {% block form_action %}/squads/{{squad.id}}/add_item{% endblock %}
 {% block table %}
-	<table id="id_list_table">
+	<table id="id_list_table" class="table">
 		{% for item in squad.item_set.all %}
 		<tr><td>{{ item.text }}</td></tr>
 		{% endfor %}
