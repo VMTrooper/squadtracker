@@ -42,7 +42,7 @@ Assume we have a user account at /home/username
 ```
 
 ### Pip Packages for Test Server
-pip3
+* pip3
 * pymongo
 * django==1.8.4
 * django-jenkins
