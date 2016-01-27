@@ -26,23 +26,28 @@ NOTE: -m creates a home folder, -s sets elspeth to use bash by default
 	sudo pip3 install virtualenv gunicorn django-jenkins
 
 # Need to debug fabric for following:
-- sites-available and sites-enabled ln not created
-- default site not removed
+- should check for and delete the default site not removed
+```
+sudo rm /etc/nginx/sites-enabled/default
+```
 
 # In the source directory, run the following commands...
 ```
+# source the nginx site template and replace with the site name
 $ sed "s/SITENAME/prod.squadtracker.io/g" \
 deploy_tools/nginx.template.conf | sudo tee \
 /etc/nginx/sites-available/prod.squadtracker.io
 
-$ sudo ln -s ../sites-available/prod.squadtracker.io \
+# create the ln for the sites-available directory under sites-enabled
+$ sudo ln -s /etc/nginx/sites-available/prod.squadtracker.io \
 /etc/nginx/sites-enabled/prod.squadtracker.io
 
+# source the gunicorn upstart config template and replace with the site name
 $ sed "s/SITENAME/prod.squadtracker.io/g" \
 deploy_tools/gunicorn-upstart.template.conf | sudo tee \
 /etc/init/gunicorn-prod.squadtracker.io.conf
 
+# Reload nginx and start the web site service
 $ sudo service nginx reload
-
 $ sudo start gunicorn-prod.squadtracker.io
 ```
