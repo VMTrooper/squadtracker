@@ -28,3 +28,21 @@ NOTE: -m creates a home folder, -s sets elspeth to use bash by default
 # Need to debug fabric for following:
 - sites-available and sites-enabled ln not created
 - default site not removed
+
+# In the source directory, run the following commands...
+```
+$ sed "s/SITENAME/prod.squadtracker.io/g" \
+deploy_tools/nginx.template.conf | sudo tee \
+/etc/nginx/sites-available/prod.squadtracker.io
+
+$ sudo ln -s ../sites-available/prod.squadtracker.io \
+/etc/nginx/sites-enabled/prod.squadtracker.io
+
+$ sed "s/SITENAME/prod.squadtracker.io/g" \
+deploy_tools/gunicorn-upstart.template.conf | sudo tee \
+/etc/init/gunicorn-prod.squadtracker.io.conf
+
+$ sudo service nginx reload
+
+$ sudo start gunicorn-prod.squadtracker.io
+```

@@ -1,0 +1,13 @@
+description "Gunicorn server for staging.squadtracker.io"
+
+start on net-device-up
+stop on shutdown
+
+respawn
+
+setuid elspeth
+chdir /home/elspeth/sites/staging.squadtracker.io/source
+
+exec ../virtualenv/bin/gunicorn \
+     --bind unix:/tmp/staging.squadtracker.io.socket \
+     squadtracker.wsgi:application
